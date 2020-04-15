@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <HelloWorld msg="Welcome to Your Vue.js App" />
-    <span>User: "{{ currentUserEmail }}" <br> uid: "{{currentUserUid}}"</span
+    <span
+      >User: "{{ currentUserTitle }}" <br />
+      uid: "{{ currentUserUid }}"</span
     ><br />
     <button @click="logout">logout</button>
   </div>
@@ -18,17 +20,24 @@ export default {
     HelloWorld,
   },
   computed: {
-    currentUserEmail: function() {
-      return firebase.auth().currentUser
-        ? firebase.auth().currentUser.email
-        : "none";
+    currentUser: function() {
+      return firebase.auth().currentUser ? firebase.auth().currentUser : null;
+    },
+    currentUserTitle: function() {
+      var title = "none";
+
+      if (this.currentUser) {
+        title = this.currentUser.displayName
+          ? this.currentUser.displayName
+          : this.currentUser.email;
+      }
+
+      return title;
     },
     currentUserUid() {
-      return firebase.auth().currentUser
-        ? firebase.auth().currentUser.uid
-        : "none";
-    }
-   },
+      return this.currentUser ? this.currentUser.uid : "none";
+    },
+  },
   methods: {
     logout: function() {
       firebase

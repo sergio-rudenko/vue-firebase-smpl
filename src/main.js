@@ -1,5 +1,8 @@
 import Vue from "vue";
-import firebase from "firebase";
+import firebase from "firebase/app";
+
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
 
 import App from "./App.vue";
 import "./registerServiceWorker";
@@ -7,6 +10,7 @@ import router from "./router";
 import store from "./store";
 
 Vue.config.productionTip = false;
+Vue.use(Buefy);
 
 const firebaseConfig = {
   apiKey: "AIzaSyC_o9lkuYcGjVS89Y_s7g1ChfVOEP3R1L4",
